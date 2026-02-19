@@ -201,11 +201,9 @@ docker compose up --build
 Y ya accederíamos a nuestra aplicación por el puerto 8888: <localhost:8888>
 
 
-
-
 ### Apartado 5 - 3. Análisis de seguridad con DAST.
 
-
+Una vez levantantada la aplicación en el puerto 8888, 
 ---
 # Entrega
 
