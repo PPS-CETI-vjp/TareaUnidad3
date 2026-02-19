@@ -17,13 +17,28 @@
 ---
 # Objetivos
 
-- Saber manejar las principales listas en fuentes abiertas sobre vulnerabilidades, debilidades, etc., saber relacionarlas y  extraer información de ellas.
-- Saber aplicar el estandar ASVS e identificar las comprobaciones a realizar en una aplicación según el nivel de seguridad de la misma.
+1. Comprender los principios del desarrollo seguro de aplicaciones web y su integración en el ciclo de vida del software.
+
+1. Identificar y analizar las principales vulnerabilidades recogidas en el OWASP Top Ten y su impacto sobre la seguridad de los sistemas.
+
+1. Aplicar técnicas de validación y sanitización de entradas en formularios para prevenir ataques de inyección.
+
+1. Conocer y emplear estándares actuales de autenticación y autorización (como OAuth2, OpenID Connect y SAML).
+
+1. Detectar y prevenir ataques de robo o secuestro de sesión mediante mecanismos de protección de cookies y tokens.
+
+1. Implementar buenas prácticas en el almacenamiento seguro de contraseñas usando algoritmos de hash y salting adecuados.
+
+1. Evaluar y aplicar contramedidas avanzadas como HSTS, CSP y CAPTCHAs para mitigar vulnerabilidades comunes.
+
+1. Analizar vulnerabilidades web reales y proponer estrategias de mitigación basadas en herramientas y auditorías.
+
+1. Conocer el funcionamiento y los beneficios de los Web Application Firewalls (WAF) en la protección de portales y aplicaciones.
 
 ---
 # Resultados de aprendizaje y Criterios de Evaluación
 
-Esta actividad se relaciona con el resultado de aprendizaje y criterios de evaluación RA 2 a, b,c y d.
+Esta actividad se relaciona con el resultado de aprendizaje y criterios de evaluación RA 3 a, b, c, d, e, f y g.
 
 ---
 # Desarrollo
@@ -42,11 +57,10 @@ Puedes acceder a la tarea desde el enlace de `github` o clonando el repositorio 
 
 ![](./docs/images/tu31.png)
 
-Si le das a Acceder con Visual Studio Code, tendrás que dar a permitir abrir, enlaces, descargar extensiones para vscode, confiar en los autores,etc.....
+Si le das a Acceder con Visual Studio Code, tendrás que dar a permitir abrir, enlaces, descargar extensiones para vscode, confiar en los autores,etc. Se creará tu repositorio en `$HOME/Github-classroom/`.
 
 ![](./docs/images/tu32.png)
 
-> Si abres con `Visual Studio Code` se creará tu repositorio en `$HOME/Github-classroom/`.
 
 - Si le das al repositorio, te llevará a tu repositorio. Te habrá creado un repositorio en tu espacio personal que tendrás que modificar.
 
@@ -103,28 +117,19 @@ Crea un documento en `Markdown` con nombre `ActividadSeguridad` donde pegarás l
 ---
 ## Apartado 5 - Escaneo estático y dinámico de una aplicación web.
 
-Tienes en la carpeta `app` una [aplicación spring java con nombre store_app](./files/store-app.zip).
+En el repositorio tienes en una [aplicación spring java con nombre store_app](./files/store-app.zip).
 
 Estas son las diferentes operaciones a realizar en este apartado:
 1. Realiza sobre ella un Análisis Estático de Código  (SAST) con la herramienta `SonarQube`.
-1. Crea un contenedor docker donde se ejecute la aplicación para poder realizar el escaneo de seguridad dinámico..
+1. Crea un contenedor docker donde se ejecute la aplicación para poder realizar el escaneo de seguridad dinámico.
 1. Realiza un Análisis de Seguridad con una herramienta DAST (Nessus o OwASP ZAP)
-1. Con los resultados del análisis estático y dinámico realiza una tabla con al menos 5 problemas en los que indicarás:
+1. Realiza una tabla con algunos de los problemas encontrados en los análisis
 
-| - Vulnerabilidad     | Nombre/breve descripción de la vulnerabilidad    |
-|----------------------|--------------------------------------------------|
-| - CWE                | Código CWE y nombre                              |
-| - Consecuencias      | Qué riesgos puede provocar la vulnerabilidad     |
-| - Localización       | Archivos de la aplicación a los que afecta       |
-| - Exploit(s)         | Como se “ataca” la aplicación                    |
-| - Solución           |Modificaciones realizadas en la aplicación para resolver la vulnerabilidad   |
-| - Otra información     | Lo que consideres necesario para aclarar la vulnerabilidad |
-
-Vamos desgranando los pasos sobre todo la compilación y creación del contenedor con Docker:
+Vamos desgranando los pasos. Presta especial atención al apartado 5-2 donde se vé la compilación y creación del contenedor con Docker.
 
 ### Apartado 5 - 1.  Escaneo estático.
 
-Consulta en la actividad de la unidad 3 cómo realizar un análisis estático de código utilizando la aplicación `SonarQube` como servidor de análisis y realiza el análisis estático de código para ver las debilidades y vulnerabilidades presentes.
+Consulta en la actividad de la unidad 3 cómo realizar un análisis estático de código utilizando la aplicación `SonarQube` como servidor de análisis. Realiza el análisis estático de código para ver las debilidades y vulnerabilidades presentes.
 > Recuerda que la información de vulnerabilidades obtenida tendrás que utilizarla para realizar la tabla final.
 
 
@@ -140,12 +145,9 @@ Nuestra aplicación esta desarrollada en `Spring Java` por lo que utiliza java 8
 
 Vamos a ejecutar la aplicación en un contenedor docker en el cual crearemos una máquina java personalizada en la cual vamos a compilar mientras creamos dicha imagen.
 
-Hay que puntualizar, como hemos dicho antes, que hay que compilar y ejecutar con Java 8, por lo que tenemos que utilizar un contenedor con esa versión de java instalada.
-
 También podríamos hacer todo el proceso sobre un SO, instalado `Java 8` en él y posteriormente instalando y compilando con `Maven`.
 
 En nuestro caso con Docker, utilizamos un `Dockerfile` que recordamos que es un archivo en el cual especificamos las características de la máquina y las operaciones que hay que hacer al crearla, en este caso sera:
-- Instalar `Maven` para compilar el código fuente.
 - Compilar con `Maven` el proyecto.
 
 [`store-app/Dockerfile`](./files/Dockerfile)
@@ -181,10 +183,20 @@ ENTRYPOINT ["java", "-jar", "app.jar"]
 
 Para crear el contenedor usamos `Docker compose`:
 
-[`docker-compose.yml](./files/docker-compose.yml)
+[`docker-compose.yml`](./files/docker-compose.yml)
+```yml
+services:
+  store-app:
+    build: .
+    container_name: store-app
+    ports:
+      - "8888:8888"
+```
 
+Como vemos se utiliza el puerto 8888 para exponer la aplicación.
 
-Para crear la imagen y levantar el contenedor, situados en el directorio `store-app`
+Una vez hemos colocado estos dos archivos en la carpeta del proyecto `store-app`:
+
 ```bash
 
 # Nos situamos en el directorio de la aplicación
@@ -198,6 +210,7 @@ docker compose up --build
 
 # Para producción: docker compose up -d
 ```
+
 Esperamos a que se descargen las imágenes y se construya la nuestra personalizada (compilandose el código)  y despues de unos minutos ya accederíamos a nuestra aplicación por el puerto 8888: <localhost:8888>
 
 ![alt text](./docs/images/tu35.png)
@@ -205,6 +218,20 @@ Esperamos a que se descargen las imágenes y se construya la nuestra personaliza
 ### Apartado 5 - 3. Análisis de seguridad con DAST.
 
 Una vez levantantada la aplicación en el puerto 8888 ya estamos en disposición de poder escanearla con cualquiera de las aplicaciones DAST disponibles. En nuestro caso, en las actividades, hemos visto como podíamos comprobar la seguridad de las aplicaciones con Nessus y con OWASP ZAP.
+
+### Apartado 5 - 4. Análisis de los problemas encontrados.
+
+Con los resultados del análisis estático y dinámico realiza una tabla con al menos 5 problemas en los que indicarás:
+
+| - Vulnerabilidad     | Nombre/breve descripción de la vulnerabilidad    |
+|----------------------|--------------------------------------------------|
+| - CWE                | Código CWE y nombre                              |
+| - Consecuencias      | Qué riesgos puede provocar la vulnerabilidad     |
+| - Localización       | Archivos de la aplicación a los que afecta       |
+| - Exploit(s)         | Como se “ataca” la aplicación                    |
+| - Solución           |Modificaciones que podemos realizar en la aplicación para resolver la vulnerabilidad   |
+| - Otra información     | Lo que consideres necesario para aclarar la vulnerabilidad |
+
 
 ---
 # Entrega
