@@ -39,7 +39,7 @@ Utilizaremos `GitHub Classroom` para la entrega de esta actividad.
 ![](./docs/images/tu3.png)
 
 Puedes acceder a la tarea desde el enlace de `github` o clonando el repositorio desde `Visual Studio Code`.
- 
+
 ![](./docs/images/tu31.png)
 
 Si le das a Acceder con Visual Studio Code, tendrás que dar a permitir abrir, enlaces, descargar extensiones para vscode, etc.....
@@ -53,7 +53,7 @@ Si le das a Acceder con Visual Studio Code, tendrás que dar a permitir abrir, e
 
 - Desde mi panel de control tendré acceso a tu repositorio, o sea que ya no tendrás que poner tu repositorio como público.
 
-- 
+-
 
 ## Apartado 1 -  Actividad: Creación del entorno de Pruebas.
 
@@ -102,10 +102,10 @@ Crea un documento en `Markdown` con nombre `ActividadSeguridad` donde pegarás l
 
 Tienes en la carpeta `app` una [aplicación spring java con nombre store_app](./files/store-app.zip).
 
-1. Realiza sobre ella un Análisis Estático de Código  (SAST) con la herramienta `SonarQube`. 
-2. Crea un contenedor docker donde se ejecute la aplicación.
-3. Realiza un Análisis de Seguridad con una herramienta DAST (Nessus o OwASP ZAP)
-4. Con los resultados del análisis estático y dinámico realiza una tabla con al menos 5 problemas en los que indicarás:
+1. Realiza sobre ella un Análisis Estático de Código  (SAST) con la herramienta `SonarQube`.
+1. Crea un contenedor docker donde se ejecute la aplicación.
+1. Realiza un Análisis de Seguridad con una herramienta DAST (Nessus o OwASP ZAP)
+1. Con los resultados del análisis estático y dinámico realiza una tabla con al menos 5 problemas en los que indicarás:
 
 | - Vulnerabilidad     | Nombre/breve descripción de la vulnerabilidad    |
 |----------------------|--------------------------------------------------|
@@ -115,6 +115,10 @@ Tienes en la carpeta `app` una [aplicación spring java con nombre store_app](./
 | - Exploit(s)         | Como se “ataca” la aplicación                    |
 | - Solución           |Modificaciones realizadas en la aplicación para resolver la vulnerabilidad   |
 | - Otra información     | Lo que consideres necesario para aclarar la vulnerabilidad |
+
+Vamos desgranando los pasos sobre todo la compilación y creación del contenedor con Docker:
+
+### Compilación de la aplicación.
 
 
 
@@ -131,18 +135,18 @@ Publicarás el repositorio en `GitHub Pages` al igual que hicimos en las otras t
 
 > Recuerda añadir toda la estructura de `mkdocs`, `requeriments.txt` y el `workflow` de `GitHub Actions` para que se genere la documentación en `GitHub Pages`.
 > Recuerda, que como he comentado antes, mientras el repositorio es privado, pueden fallar el `workflow`.
->> Con php podemos crear un servidor web para visualizar los archivos creados: `php -S 0:8080` nos muestra el contenido web del directorio actual, por lo que si yo estoy en la rama `gh-pages` debería de mostrarse lo mismo que en `github.io`. 
+>> Con php podemos crear un servidor web para visualizar los archivos creados: `php -S 0:8080` nos muestra el contenido web del directorio actual, por lo que si yo estoy en la rama `gh-pages` debería de mostrarse lo mismo que en `github.io`.
 
-Una vez realizada la tarea, el envío se realizará a través de la plataforma. 
+Una vez realizada la tarea, el envío se realizará a través de la plataforma.
 Deberás de entregar al menos:
 
 - El **repositorio** que has creado, **comprimido** en un archivo.
-- El **enlace** a tu repositorio en la página de `github.com`. 
+- El **enlace** a tu repositorio en la página de `github.com`.
 - Revisa que has añadido como colaborador en tu repositorio de GitHub al profesor: `PPSvjp` **Settings** > **Collaborators**.
 
 La documentación en `GitHub Pages` debe de contener al menos:
 - Archivo **Index.md** con enlace al resto de secciones.
-    
+
 - Las siguientes **secciones**:
 
     - **Apartado 1: Creación del entorno de Pruebas.**: donde figure la documentación realizada en el [apartado 1](#apartado-1----actividad-creación-del-entorno-de-pruebas).
@@ -152,7 +156,7 @@ La documentación en `GitHub Pages` debe de contener al menos:
     - **Apartado 3 - Apartado 3 - Actividad de Autenticación, vulnerabilidades de gestión de sesiones, protección de datos sensibles o Control de acceso**: donde figure la documentación realizada en el [apartado 3](#apartado-3---actividad-de-autenticación-vulnerabilidades-de-gestión-de-sesiones-protección-de-datos-sensibles-o-control-de-acceso).
 
     - **Apartado 4 - Actividad sobre errores en la Seguridad y componentes vulnerables**: donde figure la documentación realizada en el [apartado 4](#apartado-5---escaneo-estático-y-dinámico-de-una-aplicación-web).
-    
+
     - **Apartado 5 - Escaneo estático y dinámico de aplicación web**: donde figure la documentación realizada en el [apartado 5](#apartado-5---escaneo-estático-y-dinámico-de-una-aplicación-web).
 
 
@@ -171,7 +175,7 @@ La puntuación de los apartados es la siguiente:
 Si **no se adjunta el repositorio comprimido, no se indica la documentación del repositorio en github.io o no se añade como colaborador en el repositorio al profesor**, la tarea será **calificada como 0**
 
 > NOTA IMPORTANTE
-> 
+>
 > Aquellos apartados/subapartados en los que las capturas de pantalla no sean claras o no tengan como fondo de pantalla la plataforma con tu usuario mostrando claramente la foto de tu perfil, no serán corregidos.
 
 En el resto de los casos, la puntuación de los apartados es la siguiente:
@@ -189,5 +193,5 @@ En el resto de los casos, la puntuación de los apartados es la siguiente:
 
 Para superar la tarea habrá que conseguir 5 puntos o más.
 
---- 
+---
 [![Licencia: CC BY-NC-SA 4.0](https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
