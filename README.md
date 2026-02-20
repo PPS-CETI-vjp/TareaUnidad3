@@ -224,8 +224,9 @@ Una vez levantantada la aplicación en el puerto 8888 ya estamos en disposición
 > En este archivo tienes [el docker-compose.yml de todo el escenario completo: `store-app` + `SonarQube` + `Nessus` Configurado](./files/docker-composeEscenario.yml). Lo único que tienes que hacer es sustituir este `docker-compose.yml` por el anterior y levantar el escenario `docker compose up --build`
 >
 > Tendrás acceso  a las tres aplicaciones: `store-app` en <http://localhost:8888>, `SonarQube` en <http://localhost:9000> y `Nessus` en <https://localhost:8834>.
+> Recuerda que las credenciales de `SonarQube` son usuario:admin passwd: admin y las de `Nessus` usuario:usuario passwd:usuario.
 
-![](./docs/images/tu35.png)
+![](./docs/images/tu36.png)
 
 
 ### Apartado 5 - 4. Análisis de los problemas encontrados.
@@ -249,10 +250,10 @@ Con los resultados del análisis estático y dinámico realiza una tabla con al 
 
 Al acceder a la tarea en `classroom.github.com` se te ha creado un repositorio. En él es en el que tendrás que documentar la realización de los diferentes apartados de la tarea.
 
-> Observa que al ser repositorio privado, por lo que no te va a permitir configurar `GitHub Pages`. No obstante deberás configurar `Mkdocs` para que genera las páginas html sobre los archivos `.md` donde estás documentando todo.
+> Observa que al ser repositorio privado, por lo que no te va a permitir configurar `GitHub Pages`. No obstante deberás configurar `Mkdocs` para que genere las páginas html sobre los archivos `.md` donde estás documentando todo.
 > Recuerda añadir toda la estructura de `mkdocs`, `requeriments.txt` y el `workflow` de `GitHub Actions` para que se genere la documentación en la rama `GH-Pages`.
 >
->> Para visualizar los archivos `html` que se están creando con ` mkdocs`, con php podemos crear un servidor web para visualizar los archivos creados: `php -S 0:8080` nos muestra el contenido web del directorio actual, por lo que si yo estoy en la rama `gh-pages` debería de mostrarse lo mismo que en `github.io`.
+> Para visualizar los archivos `html` que se están creando con ` mkdocs`, con php podemos crear un servidor web para visualizar los archivos creados: `php -S 0:8080` nos muestra el contenido web del directorio actual, por lo que si yo estoy en la rama `gh-pages`.
 
 -----------   
 
