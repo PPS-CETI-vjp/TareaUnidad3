@@ -119,6 +119,8 @@ Crea un documento en `Markdown` con nombre `ActividadSeguridad` donde pegarás l
 
 En el repositorio tienes en una [aplicación spring java con nombre store_app](./files/store-app.zip).
 
+Deberás descomprimirla y todas las operaciones indicadas en adelante se realizarán sobre la carpeta de la aplicación `store-app`
+
 Estas son las diferentes operaciones a realizar en este apartado:
 1. Realiza sobre ella un Análisis Estático de Código  (SAST) con la herramienta `SonarQube`.
 1. Crea un contenedor docker donde se ejecute la aplicación para poder realizar el escaneo de seguridad dinámico.
@@ -219,6 +221,13 @@ Esperamos a que se descargen las imágenes y se construya la nuestra personaliza
 
 Una vez levantantada la aplicación en el puerto 8888 ya estamos en disposición de poder escanearla con cualquiera de las aplicaciones DAST disponibles. En nuestro caso, en las actividades, hemos visto como podíamos comprobar la seguridad de las aplicaciones con Nessus y con OWASP ZAP.
 
+> En este archivo tienes [el docker-compose.yml de todo el escenario completo: `store-app` + `SonarQube` + `Nessus` Configurado](./files/docker-composeEscenario.yml). Lo único que tienes que hacer es sustituir este `docker-compose.yml` por el anterior y levantar el escenario `docker compose up --build`
+>
+> Tendrás acceso  a las tres aplicaciones: `store-app` en <http://localhost:8888>, `SonarQube` en <http://localhost:9000> y `Nessus` en <https://localhost:8834>.
+
+![](./docs/images/tu35.png)
+
+
 ### Apartado 5 - 4. Análisis de los problemas encontrados.
 
 Con los resultados del análisis estático y dinámico realiza una tabla con al menos 5 problemas en los que indicarás:
@@ -254,7 +263,7 @@ Deberás de entregar al menos:
 - El **enlace** a tu repositorio en la página de `github.com`.
 - Revisa que has añadido como colaborador en tu repositorio de GitHub al profesor: `PPSvjp` **Settings** > **Collaborators**.
 
-La documentación en `GitHub Pages` debe de contener al menos:
+La documentación generada en el la rama `gh-pages` del repositorio debe de contener al menos:
 - Archivo **Index.md** con enlace al resto de secciones.
 
 - Las siguientes **secciones**:
@@ -282,7 +291,7 @@ PPS-Unidad3-TareaRA3-sanchez_manas_begona
 
 La puntuación de los apartados es la siguiente:
 
-Si **no se adjunta el repositorio comprimido, no se indica la documentación del repositorio en github.io o no se añade como colaborador en el repositorio al profesor**, la tarea será **calificada como 0**
+Si **no se adjunta el repositorio comprimido, no se indica la documentación del repositorio en github.com o no se añade como colaborador en el repositorio al profesor**, la tarea será **calificada como 0**
 
 > NOTA IMPORTANTE
 >
@@ -301,7 +310,7 @@ En el resto de los casos, la puntuación de los apartados es la siguiente:
 
 **Documentación**: presentación, extensión, exactitud, riqueza en síntaxis de MarkDown, etc de la documentación del repostorio. Con un máximo de 2 puntos.
 
-Para superar la tarea habrá que conseguir 5 puntos o más.
+Para superar la tarea habrá que conseguir una puntuación igual o superior a 5.
 
 ---
 [![Licencia: CC BY-NC-SA 4.0](https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
