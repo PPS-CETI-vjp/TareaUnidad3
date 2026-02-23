@@ -49,7 +49,7 @@ Lee la tarea hasta el final para ver lo que tienes que entregar e ir cogiendo la
 
 Utilizaremos `GitHub Classroom` para la entrega de esta actividad.
 
-- Usa el siguiente código de invitación para la tarea en `GitHub Classroom`: <https://classroom.github.com/a/d4fLsmeV> y acepta la invitación:
+- Usa el código de invitación que tienes en la plataforma moodle para esta tarea. Acepta la invitación i sigue los pasos que te indican:
 
 ![](./docs/images/tu3.png)
 
@@ -119,7 +119,7 @@ Crea un documento en `Markdown` con nombre `ActividadSeguridad` donde pegarás l
 
 En el repositorio tienes en una [aplicación spring java con nombre store_app](./files/store-app.zip).
 
-Deberás descomprimirla y todas las operaciones indicadas en adelante se realizarán sobre la carpeta de la aplicación `store-app`
+Deberás descomprimirla. Todas las operaciones indicadas en adelante, se realizarán sobre la carpeta de la aplicación `store-app`.
 
 Estas son las diferentes operaciones a realizar en este apartado:
 1. Realiza sobre ella un Análisis Estático de Código  (SAST) con la herramienta `SonarQube`.
@@ -258,7 +258,7 @@ Al acceder a la tarea en `classroom.github.com` se te ha creado un repositorio. 
 ```bash
 # creo una carpeta donde visualizar mi web
 mkdir /ruta/a/carpeta/web
-# descargo la rama gh-pages de mi respositorio
+# Clono mi respositorio
 git clone Mirespositorio/MiTareaUnidad3.git 
 # Me coloco en la carpeta clonada
 cd MiTareaUnidad3
@@ -309,7 +309,7 @@ PPS-Unidad3-TareaRA3-sanchez_manas_begona
 
 La puntuación de los apartados es la siguiente:
 
-Si **no se adjunta el repositorio comprimido, no se indica la documentación del repositorio en github.com o no se añade como colaborador en el repositorio al profesor**, la tarea será **calificada como 0**
+Si **no se adjunta el repositorio comprimido, no se indica la documentación del repositorio en github.com**, la tarea será **calificada como 0**
 
 > NOTA IMPORTANTE
 >
