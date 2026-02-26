@@ -143,11 +143,11 @@ Consulta en la actividad de la unidad 3 cómo realizar un análisis estático de
 
 Para ejecutar la aplicación, al ser una aplicación en Java, tenemos que compilarla primero para generar los archivos `bytecode` que son los que se ejecutaran en la MV de Java.
 
-Nuestra aplicación esta desarrollada en `Spring Java` por lo que utiliza java 8. Por ello tenemos que compilarla en esa versión de java.
+Nuestra aplicación esta desarrollada en `Spring Java` por lo que utiliza java 11. Por ello tenemos que compilarla en esa versión de java.
 
 Vamos a ejecutar la aplicación en un contenedor docker en el cual crearemos una máquina java personalizada en la cual vamos a compilar mientras creamos dicha imagen.
 
-También podríamos hacer todo el proceso sobre un SO, instalado `Java 8` en él y posteriormente instalando y compilando con `Maven`.
+También podríamos hacer todo el proceso sobre un SO, instalado `java 11` en él y posteriormente instalando y compilando con `Maven`.
 
 En nuestro caso con Docker, utilizamos un `Dockerfile` que recordamos que es un archivo en el cual especificamos las características de la máquina y las operaciones que hay que hacer al crearla, en este caso sera:
 - Compilar con `Maven` el proyecto.
@@ -155,7 +155,7 @@ En nuestro caso con Docker, utilizamos un `Dockerfile` que recordamos que es un 
 [`store-app/Dockerfile`](./files/Dockerfile)
 ```dockerfile
 # ===== Etapa 1: Build con Maven + JDK 8 =====
-FROM maven:3.8.7-eclipse-temurin-8 AS build
+FROM maven:3.8.7-eclipse-temurin-11 AS build
 
 WORKDIR /app
 
@@ -167,7 +167,7 @@ COPY src ./src
 RUN mvn clean package -DskipTests
 
 # ===== Etapa 2: Runtime con JRE 8 =====
-FROM eclipse-temurin:8-jre
+FROM eclipse-temurin-11-jre
 
 WORKDIR /app
 

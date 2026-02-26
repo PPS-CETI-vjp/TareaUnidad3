@@ -1,5 +1,3 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/d4fLsmeV)
-[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-2e0aaae1b6195c2367325f4f02e2d04e9abb55f0b24a779b69b11b9e10269abc.svg)](https://classroom.github.com/online_ide?assignment_repo_id=22736036&assignment_repo_type=AssignmentRepo)
 # Actividad obligatoria Unidad 3 - Tarea RA3. Detección y corrección de vulnerabilidades de aplicaciones web
 
 
@@ -115,7 +113,7 @@ Crea un documento en `Markdown` con nombre `ActividadSeguridad` donde pegarás l
 - Incorpora tambien un par de lineas para cada solución implementada, indicando qué medidas hemos tomado para securizar o mitigar los ataques.
 
 ---
-## Apartado 5 - Escaneo estático y dinámico de una aplicación web.
+## Apartado 5 - Escaneo estático, dinámico y de Dependencias de librerias de una aplicación web.
 
 En el repositorio tienes en una [aplicación spring java con nombre store_app](./files/store-app.zip).
 
@@ -124,18 +122,13 @@ Deberás descomprimirla. Todas las operaciones indicadas en adelante, se realiza
 Estas son las diferentes operaciones a realizar en este apartado:
 1. Realiza sobre ella un Análisis Estático de Código  (SAST) con la herramienta `SonarQube`.
 1. Crea un contenedor docker donde se ejecute la aplicación para poder realizar el escaneo de seguridad dinámico.
-1. Realiza un Análisis de Seguridad con una herramienta DAST (Nessus o OwASP ZAP)
+1. Realiza un Análisis de Seguridad con una herramienta DAST (`Nessus` o `OwASP ZAP`).
+1. Realiza un Análisis de dependencia de librerías con `OWASP Dependency Check`.
 1. Realiza una tabla con algunos de los problemas encontrados en los análisis
 
-Vamos desgranando los pasos. Presta especial atención al apartado 5-2 donde se vé la compilación y creación del contenedor con Docker.
+Vamos desgranando los pasos. Presta especial atención al apartado 5-1 donde se vé la creación del la imagen de contenedor con la compilación y ejecución de la aplicación.
 
-### Apartado 5 - 1.  Escaneo estático.
-
-Consulta en la actividad de la unidad 3 cómo realizar un análisis estático de código utilizando la aplicación `SonarQube` como servidor de análisis. Realiza el análisis estático de código para ver las debilidades y vulnerabilidades presentes.
-> Recuerda que la información de vulnerabilidades obtenida tendrás que utilizarla para realizar la tabla final.
-
-
-### Apartado 5 - 2. Ejecución de la aplicación.
+### Apartado 5 - 1. Ejecución de la aplicación.
 
 > Aquí tienes las indicaciones para realizarlo sobre la MV de Kali Linux que estamos utilizando para las actividades.
 >
@@ -143,47 +136,50 @@ Consulta en la actividad de la unidad 3 cómo realizar un análisis estático de
 
 Para ejecutar la aplicación, al ser una aplicación en Java, tenemos que compilarla primero para generar los archivos `bytecode` que son los que se ejecutaran en la MV de Java.
 
-Nuestra aplicación esta desarrollada en `Spring Java` por lo que utiliza java 8. Por ello tenemos que compilarla en esa versión de java.
+Nuestra aplicación esta desarrollada en `Spring Java` por lo que utiliza java 11 . Por ello tenemos que compilarla en esa versión de java.
 
 Vamos a ejecutar la aplicación en un contenedor docker en el cual crearemos una máquina java personalizada en la cual vamos a compilar mientras creamos dicha imagen.
 
-También podríamos hacer todo el proceso sobre un SO, instalado `Java 8` en él y posteriormente instalando y compilando con `Maven`.
+También podríamos hacer todo el proceso sobre un SO, instalado `java 11` en él y posteriormente instalando y compilando con `Maven`.
 
-En nuestro caso con Docker, utilizamos un `Dockerfile` que recordamos que es un archivo en el cual especificamos las características de la máquina y las operaciones que hay que hacer al crearla, en este caso sera:
-- Compilar con `Maven` el proyecto.
+En nuestro caso con Docker, utilizamos un `Dockerfile` que recordamos que es un archivo en el cual especificamos las características de la máquina y las operaciones que hay que hacer al crearla, en este caso realiza la imagen en dos pasos:
+- Paso 1. Compila con `Maven` el proyecto.
+- Paso 2. Ejecuta la aplicación con la MV de Java.
+
+Además tendrá que copiar los archivos de las archivos bitecode generados, código fuente y pom.xml para que podamos realizar el análisis estático de código en el contenedor.
 
 [`store-app/Dockerfile`](./files/Dockerfile)
 ```dockerfile
-# ===== Etapa 1: Build con Maven + JDK 8 =====
-FROM maven:3.8.7-eclipse-temurin-8 AS build
-
+# ===== Etapa 1: Build con Maven + JDK 11 =====
+FROM maven:3.8.7-eclipse-temurin-11 AS build
 WORKDIR /app
-
-# Copiamos pom y fuentes
 COPY pom.xml .
 COPY src ./src
-
-# Compilar JAR (packaging Spring Boot)
 RUN mvn clean package -DskipTests
 
-# ===== Etapa 2: Runtime con JRE 8 =====
-FROM eclipse-temurin:8-jre
-
+# ===== Etapa 2: Runtime con JRE 11 =====
+FROM eclipse-temurin:11-jre
 WORKDIR /app
-
-# Copiamos el JAR generado desde la etapa de build
 COPY --from=build /app/target/*.jar app.jar
+COPY --from=build /app/target/classes ./target/classes
+COPY --from=build /app/src ./src
+COPY --from=build /app/pom.xml ./pom.xml
+# Copia Maven ligero para sql-maven-plugin (usa el de build)
+COPY --from=build /usr/share/maven /usr/share/maven
+ENV PATH="/usr/share/maven/bin:${PATH}"
 
-# Puerto de tu app (según application.properties)
 EXPOSE 8888
-
-# Volúmenes para Derby y logs (ajusta rutas si hace falta)
 VOLUME ["/app/work", "/app/work/logs"]
 
-ENTRYPOINT ["java", "-jar", "app.jar"]
+# ENTRYPOINT: crea BD con sql-maven-plugin (usa src/main/resources/*.sql del pom)
+ENTRYPOINT ["sh", "-c", "mvn sql:execute -Dsql.format=false && java -jar app.jar"]
 ```
 
-Para crear el contenedor usamos `Docker compose`:
+Para crear el contenedor usamos `Docker compose`.  
+En este archivo tienes el docker-compose.yml de todo el escenario completo: `store-app` + `SonarQube` + `Nessus` Configurado.  
+Si quieres puedes modificarlo por ejemplo dejando únicamente `app` + `SonarQube` para el análisis estático y luego `app` y `Nessus` para el dinámico.   
+Si tu equipo no tiene problemas de estabilidad y no se bloquea puedes usar el completo.
+
 
 [`docker-compose.yml`](./files/docker-compose.yml)
 ```yml
@@ -193,9 +189,33 @@ services:
     container_name: store-app
     ports:
       - "8888:8888"
+ # Esta es el servicio de SonarQube para el análisis estático de Código
+  sonarqube:
+    image: sonarqube
+    container_name: sonarqube
+    environment:
+      - SONAR_ES_BOOTSTRAP_CHECKS_DISABLE=true
+    ports:
+      - "9000:9000"
+# Este servicio no tiene los plugins y hay que instalarlos manualmente, por eso se ha cambiado la imagen a una que ya los tiene instalados
+# pero lo tienes aquí por si quieres probarlo con la imagen oficial de Nessus y luego instalar los plugins manualmente
+# en vez de usar la imagen personalizada de abajo.
+#  nessus:
+#    image: nessus/nessus
+#    container_name: nessus
+#    ports:
+#      - "8834:8834"
+  nessus:  
+     # Nessus Vulnerability Scanner  
+    image: jmmedinac03/nessus_plugins  
+        #    image: tenable/nessus:latest-ubuntu  
+        #    restart: always  
+        #    código de activacion nessus A2AA-KWWR-ZRSM-RW79-LBPH  
+        #    acceso a la máquina por https://localhost:8834   
+        #    creado usuario:usuario passwd:usuario  
+    ports:  
+      - 8834:8834  
 ```
-
-Como vemos se utiliza el puerto 8888 para exponer la aplicación.
 
 Una vez hemos colocado estos dos archivos en la carpeta del proyecto `store-app`:
 
@@ -204,32 +224,112 @@ Una vez hemos colocado estos dos archivos en la carpeta del proyecto `store-app`
 # Nos situamos en el directorio de la aplicación
 cd ruta/a/carpeta/store-app
 
-# 1. Crear directorio para datos persistentes
-mkdir -p data
-
-# 3. Levantar
+#  Levantar
 docker compose up --build
 
 # Para producción: docker compose up -d
 ```
 
-Esperamos a que se descargen las imágenes y se construya la nuestra personalizada (compilandose el código)  y despues de unos minutos ya accederíamos a nuestra aplicación por el puerto 8888: <localhost:8888>
+Observa como se van mostrando los logs de los diferentes servicios y que te pueden informar de si se produjera un error para solucionarlo.
+
+![alt text](./docs/images/tu39.png)
+
+Esperamos a que se descargen las imágenes y se construya la nuestra personalizada (compilandose el código)  y despues de unos minutos ya accederíamos a los diferentes sevicios.
+
+> Tendrás acceso  a las tres aplicaciones: `store-app` en <http://localhost:8888>, `SonarQube` en <http://localhost:9000> y `Nessus` en <https://localhost:8834>.
+> Recuerda que las credenciales de `SonarQube` son usuario:admin passwd: admin y las de `Nessus` usuario:usuario passwd:usuario.
+
+Aquí se muestra la entrada a la aplicación `store-app`:
 
 ![alt text](./docs/images/tu35.png)
+
+### Apartado 5 - 2.  Escaneo estático.
+
+Consulta en la actividad de la unidad 3 cómo realizar un análisis estático de código utilizando la aplicación `SonarQube` como servidor de análisis. Realiza el análisis estático de código para ver las debilidades y vulnerabilidades presentes.
+> Recuerda que la información de vulnerabilidades obtenida tendrás que utilizarla para realizar la tabla final.
+
+Te dejo aquí indicaciones:
+
+El escaneo estático hay que hacerlo en el contenedor `store-app` ya que necesitamos tener acceso a las clases compiladas.  
+
+Necesitamos saber la Ip donde se encuentra el servidor de `SonarQube`:
+
+```bash
+#obtenemos información de la ip del contenedor sonarqube por que nos hace falta para la configuración del escaner sonar:
+docker inspect sonarqube|grep IPAddress
+
+```
+Anotamos la dirección
+
+![alt text](./docs/images/tu38.png)
+
+Y nos accedemos al contenedor de la aplicación para realizar el escaneo estático:
+
+```bash
+#accedemos al contenedor
+docker exec -it store-app /bin/bash
+```
+Una vez dentro descargamos e instalamos el cliente sonar-scanner:
+
+```bash
+# Instalamos unzip para descomprimir el cliente y nano para editar los ficheros
+apt update
+apt install unzip nano 
+# Descargar sonar-scanner.zip y traerlo a esta carpeta
+wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-8.0.1.6346-linux-x64.zip
+# Descomprimir sonar-Scanner-cli, se nos descomprime en una carpeta con nombre sonar-scanner-cli.
+# Ojo que tu versión seguro que no es la misma
+unzip sonar-scanner-cli-8.0.1.6346-linux-x64.zip 
+# borramos el zip
+rm sonar-scanner-cli-8.0.1.6346-linux-x64.zip 
+# Renombra la carpeta para que el resto de los comandos te funcionen
+mv sonar-scanner-8.0.1.6346-linux-x64/ sonar-scanner
+```
+
+Ponemos en la configuración de sonar-scanner la ip de nuestro contenedor `SonarQube`.
+
+`sonar-scanner/conf/sonar-scanner.propierties`
+```conf
+# Comprueba si es la ip de tu servidor y sino pon la ip de tu servidor sonarqube
+sonar.host.url=http://172.18.0.2:9000
+```
+
+Y ponemos el archivo de configuración del proyecto:
+```bash
+nano sonar-project.properties
+```
+
+[`app/sonar-project.properties`](./files/sonar-project.properties)
+```conf
+# Nombre del proyecto
+sonar.projectName=store-app
+sonar.projectKey=store-app
+
+# Rutas de código fuente y binarios
+sonar.sources=src/main
+sonar.java.binaries=target/classes
+```
+
+> Recuerda que tendrás que acceder a `SonarQube` para crear un token que nos permita enviar el escaneo al servidor.
+
+... y ejecutamos el escaneo:
+```bash
+sonar-scanner/bin/sonar-scanner -D sonar.token=squ_Tu_token
+```
 
 ### Apartado 5 - 3. Análisis de seguridad con DAST.
 
 Una vez levantantada la aplicación en el puerto 8888 ya estamos en disposición de poder escanearla con cualquiera de las aplicaciones DAST disponibles. En nuestro caso, en las actividades, hemos visto como podíamos comprobar la seguridad de las aplicaciones con Nessus y con OWASP ZAP.
 
-> En este archivo tienes [el docker-compose.yml de todo el escenario completo: `store-app` + `SonarQube` + `Nessus` Configurado](./files/docker-composeEscenario.yml). Lo único que tienes que hacer es sustituir este `docker-compose.yml` por el anterior y levantar el escenario `docker compose up --build`
->
-> Tendrás acceso  a las tres aplicaciones: `store-app` en <http://localhost:8888>, `SonarQube` en <http://localhost:9000> y `Nessus` en <https://localhost:8834>.
-> Recuerda que las credenciales de `SonarQube` son usuario:admin passwd: admin y las de `Nessus` usuario:usuario passwd:usuario.
 
 ![](./docs/images/tu36.png)
 
 
-### Apartado 5 - 4. Análisis de los problemas encontrados.
+### Apartado 5 - 4. Analísis de dependencias de librerías.
+
+Realiza un análisis de dependencias de las librerías con `OWASP Dependency Check`. 
+
+### Apartado 5 - 5. Análisis de los problemas encontrados.
 
 Con los resultados del análisis estático y dinámico realiza una tabla con al menos 5 problemas en los que indicarás:
 
@@ -309,7 +409,7 @@ PPS-Unidad3-TareaRA3-sanchez_manas_begona
 
 La puntuación de los apartados es la siguiente:
 
-Si **no se adjunta el repositorio comprimido, no se indica la documentación del repositorio en github.com**, la tarea será **calificada como 0**
+Si **no se adjunta el repositorio comprimido, no se indica la ruta del repositorio en github.com**, la tarea será **calificada como 0**
 
 > NOTA IMPORTANTE
 >
@@ -324,7 +424,7 @@ En el resto de los casos, la puntuación de los apartados es la siguiente:
 
 **Apartado 4** - Actividad sobre Errores en la Seguridad o componentes vulnerables. Con un máximo de 1 punto.
 
-**Apartado 5** - Análisis estático y dinámico de aplicación web. Con un máximo de 4 puntos.
+**Apartado 5** - Análisis estático, dinámico y de dependencia de librerías de aplicación web. Con un máximo de 4 puntos.
 
 **Documentación**: presentación, extensión, exactitud, riqueza en síntaxis de MarkDown, etc de la documentación del repostorio. Con un máximo de 2 puntos.
 
