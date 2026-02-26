@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Enunciado - Tarea Obligatoria Unidad 3. Detección y corrección de vulnerabilidades de aplicaciones web</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">Tarea Obligatoria Unidad 3. Detección y corrección de vulnerabilidades de aplicaciones web</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href=".." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="./" class="nav-link active" aria-current="page">Enunciado</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../Actividad1.md" class="nav-link">Creación del entorno de Pruebas</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href=".." class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" class="nav-link disabled">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#actividad-obligatoria-unidad-3-tarea-ra3-deteccion-y-correccion-de-vulnerabilidades-de-aplicaciones-web" class="nav-link">Actividad obligatoria Unidad 3 - Tarea RA3. Detección y corrección de vulnerabilidades de aplicaciones web</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#objetivos" class="nav-link">Objetivos</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#resultados-de-aprendizaje-y-criterios-de-evaluacion" class="nav-link">Resultados de aprendizaje y Criterios de Evaluación</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#desarrollo" class="nav-link">Desarrollo</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#clonar-repositorio-de-la-tarea" class="nav-link">Clonar repositorio de la tarea.</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#apartado-1-actividad-creacion-del-entorno-de-pruebas" class="nav-link">Apartado 1 - Actividad: Creación del entorno de Pruebas.</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#apartado-2-vulnerabilidades-de-inyeccion-de-datos-de-entrada" class="nav-link">Apartado 2 - Vulnerabilidades de inyección de datos de entrada.</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#apartado-3-actividad-de-autenticacion-vulnerabilidades-de-gestion-de-sesiones-proteccion-de-datos-sensibles-o-control-de-acceso" class="nav-link">Apartado 3 - Actividad de Autenticación, vulnerabilidades de gestión de sesiones, protección de datos sensibles o Control de acceso.</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#apartado-4-actividad-sobre-errores-en-la-seguridad-y-componentes-vulnerables" class="nav-link">Apartado 4 - Actividad sobre errores en la Seguridad y componentes vulnerables.</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#apartado-5-escaneo-estatico-y-dinamico-de-una-aplicacion-web" class="nav-link">Apartado 5 - Escaneo estático y dinámico de una aplicación web.</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#entrega" class="nav-link">Entrega</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#indicaciones-de-entrega" class="nav-link">Indicaciones de entrega</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#calificacion-de-la-tarea" class="nav-link">Calificación de la tarea</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<p><a href="https://classroom.github.com/a/KDSjTOkm"><img alt="Review Assignment Due Date" src="https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg" /></a>
+<a href="https://classroom.github.com/online_ide?assignment_repo_id=22736036&amp;assignment_repo_type=AssignmentRepo"><img alt="Open in Visual Studio Code" src="https://classroom.github.com/assets/open-in-vscode-2e0aaae1b6195c2367325f4f02e2d04e9abb55f0b24a779b69b11b9e10269abc.svg" /></a></p>
+<h1 id="actividad-obligatoria-unidad-3-tarea-ra3-deteccion-y-correccion-de-vulnerabilidades-de-aplicaciones-web">Actividad obligatoria Unidad 3 - Tarea RA3. Detección y corrección de vulnerabilidades de aplicaciones web</h1>
+<p><strong>Índice</strong></p>
+<p><a href="#objetivos">Objetivos</a></p>
+<p><a href="#resultados-de-aprendizaje-y-criterios-de-evaluación">Resultados de aprendizaje y Criterios de Evaluación</a></p>
+<p><a href="#desarrollo">Desarrollo</a></p>
+<p><a href="#entrega">Entrega</a></p>
+<hr />
+<h1 id="objetivos">Objetivos</h1>
+<ol>
+<li>
+<p>Comprender los principios del desarrollo seguro de aplicaciones web y su integración en el ciclo de vida del software.</p>
+</li>
+<li>
+<p>Identificar y analizar las principales vulnerabilidades recogidas en el OWASP Top Ten y su impacto sobre la seguridad de los sistemas.</p>
+</li>
+<li>
+<p>Aplicar técnicas de validación y sanitización de entradas en formularios para prevenir ataques de inyección.</p>
+</li>
+<li>
+<p>Conocer y emplear estándares actuales de autenticación y autorización (como OAuth2, OpenID Connect y SAML).</p>
+</li>
+<li>
+<p>Detectar y prevenir ataques de robo o secuestro de sesión mediante mecanismos de protección de cookies y tokens.</p>
+</li>
+<li>
+<p>Implementar buenas prácticas en el almacenamiento seguro de contraseñas usando algoritmos de hash y salting adecuados.</p>
+</li>
+<li>
+<p>Evaluar y aplicar contramedidas avanzadas como HSTS, CSP y CAPTCHAs para mitigar vulnerabilidades comunes.</p>
+</li>
+<li>
+<p>Analizar vulnerabilidades web reales y proponer estrategias de mitigación basadas en herramientas y auditorías.</p>
+</li>
+<li>
+<p>Conocer el funcionamiento y los beneficios de los Web Application Firewalls (WAF) en la protección de portales y aplicaciones.</p>
+</li>
+</ol>
+<hr />
+<h1 id="resultados-de-aprendizaje-y-criterios-de-evaluacion">Resultados de aprendizaje y Criterios de Evaluación</h1>
+<p>Esta actividad se relaciona con el resultado de aprendizaje y criterios de evaluación RA 3 a, b, c, d, e, f y g.</p>
+<hr />
+<h1 id="desarrollo">Desarrollo</h1>
+<p>Lee la tarea hasta el final para ver lo que tienes que entregar e ir cogiendo las evidencias y ver lo que tienes que documentar.</p>
+<h2 id="clonar-repositorio-de-la-tarea">Clonar repositorio de la tarea.</h2>
+<p>Utilizaremos <code>GitHub Classroom</code> para la entrega de esta actividad.</p>
+<ul>
+<li>Usa el siguiente código de invitación para la tarea en <code>GitHub Classroom</code>: <a href="https://classroom.github.com/a/d4fLsmeV">https://classroom.github.com/a/d4fLsmeV</a> y acepta la invitación:</li>
+</ul>
+<p><img alt="" src="./docs/images/tu3.png" /></p>
+<p>Puedes acceder a la tarea desde el enlace de <code>github</code> o clonando el repositorio desde <code>Visual Studio Code</code>.</p>
+<p><img alt="" src="./docs/images/tu31.png" /></p>
+<p>Si le das a Acceder con Visual Studio Code, tendrás que dar a permitir abrir, enlaces, descargar extensiones para vscode, confiar en los autores,etc. Se creará tu repositorio en <code>$HOME/Github-classroom/</code>.</p>
+<p><img alt="" src="./docs/images/tu32.png" /></p>
+<ul>
+<li>Si le das al repositorio, te llevará a tu repositorio. Te habrá creado un repositorio en tu espacio personal que tendrás que modificar.</li>
+</ul>
+<p><img alt="" src="./docs/images/tu33.png" /></p>
+<ul>
+<li>Desde mi panel de control tendré acceso a tu repositorio, o sea que ya no tendrás que poner tu repositorio como público, yo como profesor tendré acceso.</li>
+</ul>
+<hr />
+<h2 id="apartado-1-actividad-creacion-del-entorno-de-pruebas">Apartado 1 -  Actividad: Creación del entorno de Pruebas.</h2>
+<p>Crea el <a href="../Actividad-CreacionEntornoPrueba/README.md">entorno de pruebas indicado en la actividad</a>.
+Crea un archivo en <code>MarkDown</code> con nombre <code>CreaciónEntornoPrueba.md</code> donde <strong>brevémente</strong>, expliques cómo has creado el entorno de pruebas e incorpore capturas de pantalla donde se pueda ver la que se ha creado correctamente.</p>
+<hr />
+<h2 id="apartado-2-vulnerabilidades-de-inyeccion-de-datos-de-entrada">Apartado 2 - Vulnerabilidades de inyección de datos de entrada.</h2>
+<p>Realiza alguna de las actividades que tienen que ver con <strong>vulnerabilidades de inyección de código</strong> o de <strong>otros tipos vulnerabilidades de entrada</strong>.</p>
+<p>Crea un documento en <code>Markdown</code> con nombre <code>ActividadVulnerabilidadesDatosEntrada.md</code> donde pegarás las capturas de pantalla que evidencien la realización de:</p>
+<ul>
+<li>Estado inicial y vulnerabilidad.</li>
+<li>Solución o mitigación 1 implementeada,(no es necesario poner todos los pasos).</li>
+<li>Solución o mitigación 2 implementeada.
+...</li>
+<li>Incorpora tambien un par de lineas para cada solución implementada, indicando qué medidas hemos tomado para securizar o mitigar los ataques.</li>
+</ul>
+<hr />
+<h2 id="apartado-3-actividad-de-autenticacion-vulnerabilidades-de-gestion-de-sesiones-proteccion-de-datos-sensibles-o-control-de-acceso">Apartado 3 - Actividad de Autenticación, vulnerabilidades de gestión de sesiones, protección de datos sensibles o Control de acceso.</h2>
+<p>Realiza alguna de las actividades que tienen que ver con vulnerabilidades que tienen que ver con <strong>Autenticación y vulnerabilidades de gestión de sesiones</strong>  o de <strong>Protección de datos sensibles y Control de acceso</strong>.</p>
+<p>Crea un documento en <code>Markdown</code> con nombre <code>ActividadAutenticacion.md</code> donde pegarás las capturas de pantalla que evidencien la realización de:</p>
+<ul>
+<li>Estado inicial y vulnerabilidad.</li>
+<li>Solución o mitigación 1 implementeada,(no es necesario poner todos los pasos).</li>
+<li>Solución o mitigación 2 implementeada.
+...</li>
+<li>Incorpora tambien un par de lineas para cada solución implementada, indicando qué medidas hemos tomado para securizar o mitigar los ataques.</li>
+</ul>
+<hr />
+<h2 id="apartado-4-actividad-sobre-errores-en-la-seguridad-y-componentes-vulnerables">Apartado 4 - Actividad sobre errores en la Seguridad y componentes vulnerables.</h2>
+<p>Realiza alguna de las actividades que tienen que ver con vulnerabilidades que tienen que ver con <strong>errores en la seguridad y componentes vulnerables</strong>.</p>
+<p>Crea un documento en <code>Markdown</code> con nombre <code>ActividadSeguridad</code> donde pegarás las capturas de pantalla que evidencien la realización de:</p>
+<ul>
+<li>Estado inicial y vulnerabilidad.</li>
+<li>Solución o mitigación 1 implementeada,(no es necesario poner todos los pasos).</li>
+<li>Solución o mitigación 2 implementeada.
+...</li>
+<li>Incorpora tambien un par de lineas para cada solución implementada, indicando qué medidas hemos tomado para securizar o mitigar los ataques.</li>
+</ul>
+<hr />
+<h2 id="apartado-5-escaneo-estatico-y-dinamico-de-una-aplicacion-web">Apartado 5 - Escaneo estático y dinámico de una aplicación web.</h2>
+<p>En el repositorio tienes en una <a href="./files/store-app.zip">aplicación spring java con nombre store_app</a>.</p>
+<p>Deberás descomprimirla y todas las operaciones indicadas en adelante se realizarán sobre la carpeta de la aplicación <code>store-app</code></p>
+<p>Estas son las diferentes operaciones a realizar en este apartado:
+1. Realiza sobre ella un Análisis Estático de Código  (SAST) con la herramienta <code>SonarQube</code>.
+1. Crea un contenedor docker donde se ejecute la aplicación para poder realizar el escaneo de seguridad dinámico.
+1. Realiza un Análisis de Seguridad con una herramienta DAST (Nessus o OwASP ZAP)
+1. Realiza una tabla con algunos de los problemas encontrados en los análisis</p>
+<p>Vamos desgranando los pasos. Presta especial atención al apartado 5-2 donde se vé la compilación y creación del contenedor con Docker.</p>
+<h3 id="apartado-5-1-escaneo-estatico">Apartado 5 - 1.  Escaneo estático.</h3>
+<p>Consulta en la actividad de la unidad 3 cómo realizar un análisis estático de código utilizando la aplicación <code>SonarQube</code> como servidor de análisis. Realiza el análisis estático de código para ver las debilidades y vulnerabilidades presentes.</p>
+<blockquote>
+<p>Recuerda que la información de vulnerabilidades obtenida tendrás que utilizarla para realizar la tabla final.</p>
+</blockquote>
+<h3 id="apartado-5-2-ejecucion-de-la-aplicacion">Apartado 5 - 2. Ejecución de la aplicación.</h3>
+<blockquote>
+<p>Aquí tienes las indicaciones para realizarlo sobre la MV de Kali Linux que estamos utilizando para las actividades.</p>
+<p>Crearemos un contenedor docker para levantar la aplicación.</p>
+</blockquote>
+<p>Para ejecutar la aplicación, al ser una aplicación en Java, tenemos que compilarla primero para generar los archivos <code>bytecode</code> que son los que se ejecutaran en la MV de Java.</p>
+<p>Nuestra aplicación esta desarrollada en <code>Spring Java</code> por lo que utiliza java 11. Por ello tenemos que compilarla en esa versión de java.</p>
+<p>Vamos a ejecutar la aplicación en un contenedor docker en el cual crearemos una máquina java personalizada en la cual vamos a compilar mientras creamos dicha imagen.</p>
+<p>También podríamos hacer todo el proceso sobre un SO, instalado <code>java 11</code> en él y posteriormente instalando y compilando con <code>Maven</code>.</p>
+<p>En nuestro caso con Docker, utilizamos un <code>Dockerfile</code> que recordamos que es un archivo en el cual especificamos las características de la máquina y las operaciones que hay que hacer al crearla, en este caso sera:
+- Compilar con <code>Maven</code> el proyecto.</p>
+<p><a href="./files/Dockerfile"><code>store-app/Dockerfile</code></a></p>
+<pre><code class="language-dockerfile"># ===== Etapa 1: Build con Maven + JDK 8 =====
+FROM maven:3.8.7-eclipse-temurin-11 AS build
+
+WORKDIR /app
+
+# Copiamos pom y fuentes
+COPY pom.xml .
+COPY src ./src
+
+# Compilar JAR (packaging Spring Boot)
+RUN mvn clean package -DskipTests
+
+# ===== Etapa 2: Runtime con JRE 8 =====
+FROM eclipse-temurin-11-jre
+
+WORKDIR /app
+
+# Copiamos el JAR generado desde la etapa de build
+COPY --from=build /app/target/*.jar app.jar
+
+# Puerto de tu app (según application.properties)
+EXPOSE 8888
+
+# Volúmenes para Derby y logs (ajusta rutas si hace falta)
+VOLUME [&quot;/app/work&quot;, &quot;/app/work/logs&quot;]
+
+ENTRYPOINT [&quot;java&quot;, &quot;-jar&quot;, &quot;app.jar&quot;]
+</code></pre>
+<p>Para crear el contenedor usamos <code>Docker compose</code>:</p>
+<p><a href="./files/docker-compose.yml"><code>docker-compose.yml</code></a></p>
+<pre><code class="language-yml">services:
+  store-app:
+    build: .
+    container_name: store-app
+    ports:
+      - &quot;8888:8888&quot;
+</code></pre>
+<p>Como vemos se utiliza el puerto 8888 para exponer la aplicación.</p>
+<p>Una vez hemos colocado estos dos archivos en la carpeta del proyecto <code>store-app</code>:</p>
+<pre><code class="language-bash">
+# Nos situamos en el directorio de la aplicación
+cd ruta/a/carpeta/store-app
+
+# 1. Crear directorio para datos persistentes
+mkdir -p data
+
+# 3. Levantar
+docker compose up --build
+
+# Para producción: docker compose up -d
+</code></pre>
+<p>Esperamos a que se descargen las imágenes y se construya la nuestra personalizada (compilandose el código)  y despues de unos minutos ya accederíamos a nuestra aplicación por el puerto 8888: <localhost:8888></p>
+<p><img alt="alt text" src="./docs/images/tu35.png" /></p>
+<h3 id="apartado-5-3-analisis-de-seguridad-con-dast">Apartado 5 - 3. Análisis de seguridad con DAST.</h3>
+<p>Una vez levantantada la aplicación en el puerto 8888 ya estamos en disposición de poder escanearla con cualquiera de las aplicaciones DAST disponibles. En nuestro caso, en las actividades, hemos visto como podíamos comprobar la seguridad de las aplicaciones con Nessus y con OWASP ZAP.</p>
+<blockquote>
+<p>En este archivo tienes <a href="./files/docker-composeEscenario.yml">el docker-compose.yml de todo el escenario completo: <code>store-app</code> + <code>SonarQube</code> + <code>Nessus</code> Configurado</a>. Lo único que tienes que hacer es sustituir este <code>docker-compose.yml</code> por el anterior y levantar el escenario <code>docker compose up --build</code></p>
+<p>Tendrás acceso  a las tres aplicaciones: <code>store-app</code> en <a href="http://localhost:8888">http://localhost:8888</a>, <code>SonarQube</code> en <a href="http://localhost:9000">http://localhost:9000</a> y <code>Nessus</code> en <a href="https://localhost:8834">https://localhost:8834</a>.
+Recuerda que las credenciales de <code>SonarQube</code> son usuario:admin passwd: admin y las de <code>Nessus</code> usuario:usuario passwd:usuario.</p>
+</blockquote>
+<p><img alt="" src="./docs/images/tu36.png" /></p>
+<h3 id="apartado-5-4-analisis-de-los-problemas-encontrados">Apartado 5 - 4. Análisis de los problemas encontrados.</h3>
+<p>Con los resultados del análisis estático y dinámico realiza una tabla con al menos 5 problemas en los que indicarás:</p>
+<table>
+<thead>
+<tr>
+<th>- Vulnerabilidad</th>
+<th>Nombre/breve descripción de la vulnerabilidad</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>- CWE</td>
+<td>Código CWE y nombre</td>
+</tr>
+<tr>
+<td>- Consecuencias</td>
+<td>Qué riesgos puede provocar la vulnerabilidad</td>
+</tr>
+<tr>
+<td>- Localización</td>
+<td>Archivos de la aplicación a los que afecta</td>
+</tr>
+<tr>
+<td>- Exploit(s)</td>
+<td>Como se “ataca” la aplicación</td>
+</tr>
+<tr>
+<td>- Solución</td>
+<td>Modificaciones que podemos realizar en la aplicación para resolver la vulnerabilidad</td>
+</tr>
+<tr>
+<td>- Otra información</td>
+<td>Lo que consideres necesario para aclarar la vulnerabilidad</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="entrega">Entrega</h1>
+<h2 id="indicaciones-de-entrega">Indicaciones de entrega</h2>
+<p>Al acceder a la tarea en <code>classroom.github.com</code> se te ha creado un repositorio. En él es en el que tendrás que documentar la realización de los diferentes apartados de la tarea.</p>
+<blockquote>
+<p>Observa que al ser repositorio privado, por lo que no te va a permitir configurar <code>GitHub Pages</code>. No obstante deberás configurar <code>Mkdocs</code> para que genere las páginas html sobre los archivos <code>.md</code> donde estás documentando todo.
+Recuerda añadir toda la estructura de <code>mkdocs</code>, <code>requeriments.txt</code> y el <code>workflow</code> de <code>GitHub Actions</code> para que se genere la documentación en la rama <code>GH-Pages</code>.</p>
+<p>Para visualizar los archivos <code>html</code> que se están creando con <code>mkdocs</code>, con php podemos crear un servidor web para visualizar los archivos creados: <code>php -S 0:8080</code> nos muestra el contenido web del directorio actual, por lo que si yo estoy en la rama <code>gh-pages</code> podré ver los archivos <code>html</code> generados.</p>
+</blockquote>
+<pre><code class="language-bash"># creo una carpeta donde visualizar mi web
+mkdir /ruta/a/carpeta/web
+# descargo la rama gh-pages de mi respositorio
+git clone Mirespositorio/MiTareaUnidad3.git 
+# Me coloco en la carpeta clonada
+cd MiTareaUnidad3
+# Me cambio a la rama gh-pages
+git checkout gh-pages
+# Levantamos el servidor web con php
+php -S 0:8080
+</code></pre>
+<p>Visualizaríamos el contenido web de nuestro respositorio en <a href="http://localhost:8080">http://localhost:8080</a></p>
+<p><img alt="" src="./docs/images/tu37.png" /></p>
+<hr />
+<p>Una vez realizada la tarea, el envío se realizará a través de la plataforma.
+Deberás de entregar al menos:</p>
+<ul>
+<li>El <strong>repositorio</strong> que has creado, <strong>comprimido</strong> en un archivo.</li>
+<li>El <strong>enlace</strong> a tu repositorio en la página de <code>github.com</code>.</li>
+<li>Revisa que has añadido como colaborador en tu repositorio de GitHub al profesor: <code>PPSvjp</code> <strong>Settings</strong> &gt; <strong>Collaborators</strong>.</li>
+</ul>
+<p>La documentación generada en el la rama <code>gh-pages</code> del repositorio debe de contener al menos:
+- Archivo <strong>Index.md</strong> con enlace al resto de secciones.</p>
+<ul>
+<li>
+<p>Las siguientes <strong>secciones</strong>:</p>
+<ul>
+<li>
+<p><strong>Apartado 1: Creación del entorno de Pruebas.</strong>: donde figure la documentación realizada en el <a href="#apartado-1----actividad-creación-del-entorno-de-pruebas">apartado 1</a>.</p>
+</li>
+<li>
+<p><strong>Apartado 2 - Actividad de vulnerabilidades de inyección de datos de entrada</strong>: donde figure la documentación realizada en el <a href="#apartado-2---vulnerabilidades-de-inyección-de-datos-de-entrada">apartado 2</a>.</p>
+</li>
+<li>
+<p><strong>Apartado 3 - Apartado 3 - Actividad de Autenticación, vulnerabilidades de gestión de sesiones, protección de datos sensibles o Control de acceso</strong>: donde figure la documentación realizada en el <a href="#apartado-3---actividad-de-autenticación-vulnerabilidades-de-gestión-de-sesiones-protección-de-datos-sensibles-o-control-de-acceso">apartado 3</a>.</p>
+</li>
+<li>
+<p><strong>Apartado 4 - Actividad sobre errores en la Seguridad y componentes vulnerables</strong>: donde figure la documentación realizada en el <a href="#apartado-5---escaneo-estático-y-dinámico-de-una-aplicación-web">apartado 4</a>.</p>
+</li>
+<li>
+<p><strong>Apartado 5 - Escaneo estático y dinámico de aplicación web</strong>: donde figure la documentación realizada en el <a href="#apartado-5---escaneo-estático-y-dinámico-de-una-aplicación-web">apartado 5</a>.</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>El archivo comprimido se nombrará siguiendo las siguientes pautas:</p>
+<p><code>PPS-Unidad3-TareaRA3-Apellido1_Apellido2_Nombre</code></p>
+<p>Asegúrate que el nombre no contenga la letra ñ, tildes ni caracteres especiales extraños. Así por ejemplo la alumna Begoña Sánchez Mañas para la primera unidad del MP de PPS, debería nombrar esta tarea como...</p>
+<p>PPS-Unidad3-TareaRA3-sanchez_manas_begona</p>
+<h2 id="calificacion-de-la-tarea">Calificación de la tarea</h2>
+<p>La puntuación de los apartados es la siguiente:</p>
+<p>Si <strong>no se adjunta el repositorio comprimido, no se indica la documentación del repositorio en github.com o no se añade como colaborador en el repositorio al profesor</strong>, la tarea será <strong>calificada como 0</strong></p>
+<blockquote>
+<p>NOTA IMPORTANTE</p>
+<p>Aquellos apartados/subapartados en los que las capturas de pantalla no sean claras o no tengan como fondo de pantalla la plataforma con tu usuario mostrando claramente la foto de tu perfil, no serán corregidos.</p>
+</blockquote>
+<p>En el resto de los casos, la puntuación de los apartados es la siguiente:
+<strong>Apartado 1</strong>- Actividad: Creación del entorno de Pruebas. Con un máximo de 1 punto.</p>
+<p><strong>Apartado 2</strong> - Actividad Vulnerabilidad de datos de entrada. Con un máximo de 1 punto.</p>
+<p><strong>Apartado 3</strong> - Actividad de Autenticación, Gestión de sesiones o Control de acceso. Con un máximo de 1 punto.</p>
+<p><strong>Apartado 4</strong> - Actividad sobre Errores en la Seguridad o componentes vulnerables. Con un máximo de 1 punto.</p>
+<p><strong>Apartado 5</strong> - Análisis estático y dinámico de aplicación web. Con un máximo de 4 puntos.</p>
+<p><strong>Documentación</strong>: presentación, extensión, exactitud, riqueza en síntaxis de MarkDown, etc de la documentación del repostorio. Con un máximo de 2 puntos.</p>
+<p>Para superar la tarea habrá que conseguir una puntuación igual o superior a 5.</p>
+<hr />
+<p><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Licencia: CC BY-NC-SA 4.0" src="https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png" /></a></p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
